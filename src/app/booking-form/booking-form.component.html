@@ -1,6 +1,28 @@
 <p>booking-form works!</p>
 
 
-<form>
+<form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
 
+    <div>
+        <label>Check In Date:</label>
+        <input type="date" formControlName="checkInDate">
+    </div>
+
+    <div>
+        <label>Check Out Date:</label>
+        <input type="date" formControlName="checkOutDate">
+    </div>
+
+    <div>
+        <label>GuestName</label>
+        <input type="text" formControlName="guestName">
+    </div>
+
+    <div>
+        <label>GuestEmail</label>
+        <input type="email" formControlName="guestEmail">
+    </div>
+
+
+ <button type="submit">Submit Form</button>
 </form>
