@@ -11,27 +11,25 @@ export class BookingFormComponent implements OnInit{
 
   bookingForm: FormGroup = new FormGroup({});
   
-  constructor(private fb: FormBuilder){}
+  constructor(private formBuilder: FormBuilder){}
+
+
 
   ngOnInit(): void {
     
-    this.bookingForm = this.fb.group({
+    //Form control validation 
+    this.bookingForm = this.formBuilder.group({
       checkInDate: ['', Validators.required],
       checkOutDate: ['', Validators.required],
       guestName: ['', Validators.required],
-      guestEmail: ['', [Validators.required, Validators.email]]
+      guestEmail: ['', [Validators.required, Validators.email]],
+      roomNumber: ['', [Validators.required, Validators.pattern(/^\d+$/)]]
 
     })
     
   }
 
   
-
-  
-
-  
-
-
   onSubmit(){
     console.log("Entered onSubmit()");
 
