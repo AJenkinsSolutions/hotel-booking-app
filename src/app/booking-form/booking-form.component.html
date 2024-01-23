@@ -6,27 +6,49 @@
     <div>
         <label>Check In Date:</label>
         <input type="date" formControlName="checkInDate">
+
+        <!-- Validation Message -->
+        <div *ngIf="bookingForm.get('checkInDate')?.invalid && bookingForm.get('checkInDate')?.touched">
+            Check In Date is required
+        </div>
     </div>
 
     <div>
         <label>Check Out Date:</label>
         <input type="date" formControlName="checkOutDate">
+        <!-- Validation Message -->
+        <div *ngIf="bookingForm.get('checkOutDate')?.invalid && bookingForm.get('checkOutDate')?.touched">
+            Check Out Date is required
+        </div>
     </div>
 
     <div>
         <label>GuestName</label>
         <input type="text" formControlName="guestName">
+        <!-- Validation Message -->
+        <div *ngIf="bookingForm.get('guestName')?.invalid && bookingForm.get('guestName')?.touched">
+            Guest Name is required
+        </div>
     </div>
 
     <div>
         <label>GuestEmail</label>
         <input type="email" formControlName="guestEmail">
+        <!-- Validation Message -->
+        <div *ngIf="bookingForm.get('guestEmail')?.invalid && bookingForm.get('guestEmail')?.touched">
+            Guest Email is required
+        </div>
     </div>
 
     <div>
         <label>roomNumber</label>
         <input type="text" formControlName="roomNumber">
+        <!-- Validation Message -->
+        <div *ngIf="bookingForm.get('roomNumber')?.invalid && bookingForm.get('roomNumber')?.touched">
+            room Number is required
+        </div>
     </div>
 
+<!-- disallow submit btn if form is invalid -->
  <button type="submit" [disabled]="bookingForm.invalid">Submit Form</button>
 </form>
