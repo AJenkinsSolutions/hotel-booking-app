@@ -41,6 +41,7 @@ export class BookingService {
    */
   addbooking(booking: Booking): void{
     this.bookingsArray.push(booking);
+    console.log("Info: Booking has be successfully added")
   }
 
   /**
@@ -66,7 +67,7 @@ export class BookingService {
    * @param updatedBooking 
    */
   updateBooking(updatedBooking: Booking):void {
-    
+
     //Gives the index of the booking that wants to be updated by user
     const index = this.bookingsArray.findIndex(bok => bok.id === updatedBooking.id);
 
