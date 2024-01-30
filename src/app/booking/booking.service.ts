@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Booking } from '../models/booking';
+import { OnInit } from '@angular/core';
 /**
  * This service will handle all the buisness logic for 'booking' including all CRUD operations
  * functions the same way a service functions in Java
@@ -7,12 +8,28 @@ import { Booking } from '../models/booking';
 @Injectable({
   providedIn: 'root'
 })
-export class BookingService {
-
-  constructor() { }
+export class BookingService implements OnInit{
 
   //Array of booking objects 
   private bookingsArray: Booking[] = [];
+
+ 
+
+
+  constructor() {
+
+    const savedBookings = localStorage.getItem("Bookings");
+    this.bookingsArray = savedBookings? JSON.parse(savedBookings) : []
+    console.log(this.bookingsArray)
+    
+   }
+
+  ngOnInit(): void {
+    
+    
+  }
+
+  
 
 
   //CRUD Operations
