@@ -41,7 +41,9 @@ export class BookingService {
    */
   addbooking(booking: Booking): void{
     this.bookingsArray.push(booking);
-    console.log("Info: Booking has be successfully added")
+    //Adding item to local storage
+    localStorage.setItem("Bookings", JSON.stringify(this.bookingsArray));
+
   }
 
   /**
@@ -56,6 +58,8 @@ export class BookingService {
     let index = this.bookingsArray.findIndex(bok => bok.id === id)
     
     const removed = this.bookingsArray.splice(index, 1)
+    //Adding item to local storage
+    localStorage.setItem("Bookings", JSON.stringify(this.bookingsArray));
 
     console.log("Item removed", removed)
 
@@ -73,6 +77,8 @@ export class BookingService {
 
     //Now we take the booking from the array and switch it with the updated one
     this.bookingsArray[index] = updatedBooking;
+    //Adding item to local storage
+    localStorage.setItem("Bookings", JSON.stringify(this.bookingsArray));
 
   }
 
