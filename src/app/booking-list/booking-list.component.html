@@ -1,8 +1,6 @@
-<p>booking-list works!</p>
-
 <h2>Booking List</h2>
 
-<div>
+<div *ngIf="bookingArray.length; else infoMsgTemaplate">
     <ul>
         <li *ngFor="let booking of bookingArray">
 
@@ -16,3 +14,10 @@
     </ul>
 </div>
 
+
+
+<ng-template #infoMsgTemaplate>
+
+    <p>No list stored in local storage</p>
+
+</ng-template>
