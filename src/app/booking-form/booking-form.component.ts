@@ -3,6 +3,7 @@ import { OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BookingService } from '../booking/booking.service';
 import { Booking } from '../models/booking';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-booking-form',
@@ -16,7 +17,8 @@ export class BookingFormComponent implements OnInit{
   constructor(
 
     private formBuilder: FormBuilder,
-    private bookingServiceImpl: BookingService
+    private bookingServiceImpl: BookingService,
+    private router: Router
     ){}
 
 
@@ -40,17 +42,16 @@ export class BookingFormComponent implements OnInit{
     console.log("Entered onSubmit()");
 
     if(this.bookingForm.valid){
-      
       console.log("Form is Valid")
-
       const currentBooking: Booking = this.bookingForm.value; 
       this.bookingServiceImpl.addbooking(currentBooking);
+      //When user clicks submit we want to navigate them to the Booking list url and it will display the list
+      this.router.navigate(['list'])
+
 
     }else{
       console.log("Form is invalid")
     }
-
-
   };
 
 

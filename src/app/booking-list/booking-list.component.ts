@@ -21,7 +21,7 @@ export class BookingListComponent implements OnInit{
 
     const savedBookings = this.bookingService.getAllBookings();
 
-   if( savedBookings!= null){
+   if(savedBookings!= null){
 
     this.bookingArray = savedBookings;
 
