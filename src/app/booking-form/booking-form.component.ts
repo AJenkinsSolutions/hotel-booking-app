@@ -42,7 +42,7 @@ export class BookingFormComponent implements OnInit{
     console.log("Entered onSubmit()");
 
     if(this.bookingForm.valid){
-      console.log("Form is Valid")
+      console.log("INFO: Form is Valid")
       const currentBooking: Booking = this.bookingForm.value; 
       this.bookingServiceImpl.addbooking(currentBooking);
       //When user clicks submit we want to navigate them to the Booking list url and it will display the list
@@ -50,7 +50,7 @@ export class BookingFormComponent implements OnInit{
 
 
     }else{
-      console.log("Form is invalid")
+      console.log("INFO: Form is invalid")
     }
   };
 
