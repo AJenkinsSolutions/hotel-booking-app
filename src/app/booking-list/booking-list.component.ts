@@ -29,6 +29,12 @@ export class BookingListComponent implements OnInit{
     console.log("No bookings saved")
    }
 
+  }
+
+  deleteById(id: number){
+    console.log("Entered deleteById in booking list component")
+
+    const removed = this.bookingService.deleteBooking(id);
 
   }
 

@@ -68,7 +68,7 @@ export class BookingService implements OnInit{
    * @param id 
    */
   deleteBooking(id: number): string | void{
-
+    console.log("INFO: Entered into deleteBooking in bookingServiceImpl")
     /**
      * Finds the index of an element based off speficed conditons
      */
