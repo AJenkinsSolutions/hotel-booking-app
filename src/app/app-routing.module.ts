@@ -7,7 +7,8 @@ import { BookingFormComponent } from './booking-form/booking-form.component';
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'list', component: BookingListComponent},
-  {path: 'create', component: BookingFormComponent}
+  {path: 'create', component: BookingFormComponent},
+  {path: 'edit/:id', component: BookingFormComponent}
 ];
 
 @NgModule({

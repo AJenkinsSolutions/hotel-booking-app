@@ -57,11 +57,14 @@ export class BookingService implements OnInit{
    * @param booking 
    */
   addbooking(booking: Booking): void{
+
+    booking.id = Date.now();
     this.bookingsArray.push(booking);
     //Adding item to local storage
     localStorage.setItem("Bookings", JSON.stringify(this.bookingsArray));
 
   }
+  
 
   /**
    * 

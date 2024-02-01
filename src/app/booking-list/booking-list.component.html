@@ -10,6 +10,7 @@
             <p>{{booking.checkInDate}}</p>
             <p>{{booking.checkOutDate}}</p>
             <button (click)="deleteById(booking.id)">Delete Booking</button>
+            <button [routerLink]="['/edit', booking.id]">Edit</button>
 
         </li>
     </ul>
