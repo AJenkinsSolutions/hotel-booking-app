@@ -3,7 +3,7 @@ import { OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BookingService } from '../booking/booking.service';
 import { Booking } from '../models/booking';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-booking-form',
@@ -18,7 +18,8 @@ export class BookingFormComponent implements OnInit{
 
     private formBuilder: FormBuilder,
     private bookingServiceImpl: BookingService,
-    private router: Router
+    private router: Router,
+    private activeRoute: ActivatedRoute
     ){}
 
 
@@ -35,6 +36,31 @@ export class BookingFormComponent implements OnInit{
 
     })
     
+    this.prefillForm(this.activeRoute, this.bookingServiceImpl, this.bookingForm);
+    
+
+    
+
+    
+  }
+
+  prefillForm(activeRoute: ActivatedRoute, bookingServiceImpl: BookingService, bookingForm: FormGroup){
+
+    //Pre filling form
+  //Check if id is in the url params
+  const id = activeRoute.snapshot.paramMap.get('id');
+
+  if(id != undefined){
+  
+    let booking = bookingServiceImpl.getBookingById(Number(id));
+
+    if(booking!= undefined){
+
+      bookingForm.patchValue(booking);
+    }
+    
+  }
+
   }
 
   
@@ -43,8 +69,21 @@ export class BookingFormComponent implements OnInit{
 
     if(this.bookingForm.valid){
       console.log("INFO: Form is Valid")
+
       const currentBooking: Booking = this.bookingForm.value; 
-      this.bookingServiceImpl.addbooking(currentBooking);
+
+      //If id is present then we are updating not creating
+      const id = this.activeRoute.snapshot.paramMap.get('id');
+      if(id){
+        //UPDATE
+        currentBooking.id = parseInt(id); 
+        this.bookingServiceImpl.updateBooking(parseInt(id), currentBooking);
+      }else{
+        // New Booking
+        this.bookingServiceImpl.addbooking(currentBooking);
+
+      }
+
       //When user clicks submit we want to navigate them to the Booking list url and it will display the list
       this.router.navigate(['list'])
 

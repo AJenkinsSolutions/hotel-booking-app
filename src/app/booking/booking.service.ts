@@ -90,10 +90,10 @@ export class BookingService implements OnInit{
    * we then switch it with the updated one
    * @param updatedBooking 
    */
-  updateBooking(updatedBooking: Booking):void {
+  updateBooking(id: number, updatedBooking: Booking):void {
 
     //Gives the index of the booking that wants to be updated by user
-    const index = this.bookingsArray.findIndex(bok => bok.id === updatedBooking.id);
+    const index = this.bookingsArray.findIndex(bok => bok.id === id);
 
     //Now we take the booking from the array and switch it with the updated one
     this.bookingsArray[index] = updatedBooking;
