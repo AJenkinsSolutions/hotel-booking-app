@@ -3,6 +3,7 @@ import { NgModelGroup } from '@angular/forms';
 import { BookingService } from '../booking/booking.service';
 import { Booking } from '../models/booking';
 
+
 @Component({
   selector: 'app-booking-list',
   templateUrl: './booking-list.component.html',
