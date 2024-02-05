@@ -1,21 +1,35 @@
 <app-home></app-home>
-<div *ngIf="bookingArray.length; else infoMsgTemaplate">
-    <ul>
-        <li *ngFor="let booking of bookingArray">
+<h3 class="mt-5 mb-3">Booking List</h3>
+<table  class="table">
+    <thead>
+        <tr>
+            <th>Guest Name</th>
+            <th>Guest Email</th>
+            <th>Roomnumber</th>
+            <th>Check in date</th>
+            <th>Check out Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
 
-            <p>{{booking.guestName}}</p>
-            <p>{{booking.guestEmail}}</p>
-            <p>{{booking.roomNumber}}</p>
-            <p>{{booking.checkInDate}}</p>
-            <p>{{booking.checkOutDate}}</p>
-            <button (click)="deleteById(booking.id)">Delete Booking</button>
-            <button [routerLink]="['/edit', booking.id]">Edit</button>
 
-        </li>
-    </ul>
+    <tbody *ngIf="bookingArray.length; else infoMsgTemaplate">
+        
+            <tr *ngFor="let booking of bookingArray">
+                
+                <td>{{booking.guestName}}</td>
+                <td>{{booking.guestEmail}}</td>
+                <td>{{booking.roomNumber}}</td>
+                <td>{{booking.checkInDate}}</td>
+                <td>{{booking.checkOutDate}}</td>
+
+                <button class="btn btn-danger" (click)="deleteById(booking.id)">Delete Booking</button>
+                <button class="btn btn-primary" [routerLink]="['/edit', booking.id]">Edit</button>
+
+            </tr>
     
-</div>
-
+    </tbody>
+</table>
 
 
 <ng-template #infoMsgTemaplate>
