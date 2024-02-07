@@ -16,13 +16,6 @@ export class BookingService implements OnInit{
  
 
 
-  constructor() {
-
-    const savedBookings = localStorage.getItem("Bookings");
-    this.bookingsArray = savedBookings? JSON.parse(savedBookings) : []
-    console.log(this.bookingsArray)
-    
-   }
 
   ngOnInit(): void {
     
@@ -61,7 +54,6 @@ export class BookingService implements OnInit{
     booking.id = Date.now();
     this.bookingsArray.push(booking);
     //Adding item to local storage
-    localStorage.setItem("Bookings", JSON.stringify(this.bookingsArray));
 
   }
   
@@ -79,7 +71,6 @@ export class BookingService implements OnInit{
     
     const removed = this.bookingsArray.splice(index, 1)
     //Adding item to local storage
-    localStorage.setItem("Bookings", JSON.stringify(this.bookingsArray));
 
     console.log("Item removed", removed)
 
@@ -98,7 +89,6 @@ export class BookingService implements OnInit{
     //Now we take the booking from the array and switch it with the updated one
     this.bookingsArray[index] = updatedBooking;
     //Adding item to local storage
-    localStorage.setItem("Bookings", JSON.stringify(this.bookingsArray));
 
   }
 
