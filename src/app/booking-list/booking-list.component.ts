@@ -21,7 +21,9 @@ export class BookingListComponent implements OnInit{
   ngOnInit(): void {
 
     this.bookingService.getAllBookings().subscribe(bookings => {
-      const bookingArrays = bookings
+      this.bookingArray = bookings
+      console.log("hello world")
+
     });
 
 

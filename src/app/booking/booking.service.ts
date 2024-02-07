@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Booking } from '../models/booking';
 import { OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 
@@ -14,11 +14,19 @@ import { Observable } from 'rxjs';
 })
 export class BookingService implements OnInit{
 
+  // Define custom headers
+  headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': 'localhost:3001',
+    'Access-Control-Allow-Methods' : 'GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS', // Specify the origin that is allowed to access the resource
+    'Access-Control-Allow-Headers' : 'Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With'
+  });
+
   //Array of booking objects 
   private bookingsArray: Booking[] = [];
 
   //Mockoon Api base Url
-  private baseUrl: string = 'localhost:3001/';
+  private baseUrl: string = 'http://localhost:3001/';
   private getEndpoint: string = 'bookings';
 
   //DI: so we can use our httpClient
