@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Booking } from '../models/booking';
 import { OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+
 /**
  * This service will handle all the buisness logic for 'booking' including all CRUD operations
  * functions the same way a service functions in Java
@@ -13,7 +17,12 @@ export class BookingService implements OnInit{
   //Array of booking objects 
   private bookingsArray: Booking[] = [];
 
- 
+  //Mockoon Api base Url
+  private baseUrl: string = 'localhost:3001/';
+  private getEndpoint: string = 'bookings';
+
+  //DI: so we can use our httpClient
+ constructor(private http: HttpClient){}
 
 
 
@@ -31,8 +40,9 @@ export class BookingService implements OnInit{
    * 
    * @returns Array of Bookings
    */
-  getAllBookings(): Booking[]{
-    return this.bookingsArray;
+  getAllBookings(): Observable<Booking[]>{
+    // return this.bookingsArray;
+    return this.http.get<Booking[]>(this.baseUrl + this.getEndpoint);
   }
 
   /**

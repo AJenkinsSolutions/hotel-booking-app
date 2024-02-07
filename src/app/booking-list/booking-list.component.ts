@@ -20,15 +20,10 @@ export class BookingListComponent implements OnInit{
   
   ngOnInit(): void {
 
-    const savedBookings = this.bookingService.getAllBookings();
+    this.bookingService.getAllBookings().subscribe(bookings => {
+      const bookingArrays = bookings
+    });
 
-   if(savedBookings!= null){
-
-    this.bookingArray = savedBookings;
-
-   }else{
-    console.log("No bookings saved")
-   }
 
   }
 
