@@ -59,14 +59,12 @@ export class BookingFormComponent implements OnInit{
 
       booking = returnData;
       console.log(booking);
+      bookingForm.patchValue(booking);
 
     })
 
 
-    if(booking!= undefined){
-
-      bookingForm.patchValue(booking);
-    }
+    
     
   }
 
@@ -89,11 +87,15 @@ export class BookingFormComponent implements OnInit{
         //UPDATE
         console.log('INFO: id is present')
         currentBooking.id = parseInt(id); 
-        this.bookingServiceImpl.updateBooking(parseInt(id), currentBooking);
+        this.bookingServiceImpl.updateBooking(parseInt(id), currentBooking).subscribe(bok => {
+          console.log('updated')
+        });
       }else{
         // New Booking
         console.log('INFO: id is not present...c reating new booking')
-        this.bookingServiceImpl.addbooking(currentBooking);
+        this.bookingServiceImpl.addbooking(currentBooking).subscribe(booking => {
+          console.log('add complete')
+        });
       }
 
       //When user clicks submit we want to navigate them to the Booking list url and it will display the list

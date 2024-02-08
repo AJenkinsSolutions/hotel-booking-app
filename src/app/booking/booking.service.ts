@@ -60,7 +60,7 @@ export class BookingService implements OnInit{
    * @param id 
    * @returns Single Booking Obj 
    */
-  getBookingById(id: number): Observable<Booking> | undefined{ 
+  getBookingById(id: number): Observable<Booking>{ 
     //It searches through the Array and returns the OBJ with matching ID
 
     return this.http.get<Booking>(this.baseUrl + this.getEndpoint + id);
@@ -71,14 +71,14 @@ export class BookingService implements OnInit{
    * Takes in a Booking Obj, Adds it to an array 
    * @param booking 
    */
-  addbooking(booking: Booking): void{
+  addbooking(booking: Booking): Observable<void>{
     console.log('INFO: Entered intop addBoooking in Booking service')
     const body: Booking = booking;
     body.id = Date.now();
     console.log(body)
     //this.bookingsArray.push(booking);
 
-    this.http.post<Booking>(this.baseUrl + this.postEndpoint, body);
+    return this.http.post<void>(this.baseUrl + 'add', body);
 
   }
   
@@ -87,17 +87,17 @@ export class BookingService implements OnInit{
    * 
    * @param id 
    */
-  deleteBooking(id: number): string | void{
+  deleteBooking(id: number): Observable<void>{
     console.log("INFO: Entered into deleteBooking in bookingServiceImpl")
     /**
      * Finds the index of an element based off speficed conditons
      */
-    let index = this.bookingsArray.findIndex(bok => bok.id === id)
-    
-    const removed = this.bookingsArray.splice(index, 1)
+    //let index = this.bookingsArray.findIndex(bok => bok.id === id)
+    return this.http.delete<void>(this.baseUrl + 'delete/' + id); 
+    //const removed = this.bookingsArray.splice(index, 1)
     //Adding item to local storage
 
-    console.log("Item removed", removed)
+    
 
   }
 
@@ -106,13 +106,13 @@ export class BookingService implements OnInit{
    * we then switch it with the updated one
    * @param updatedBooking 
    */
-  updateBooking(id: number, updatedBooking: Booking):void {
+  updateBooking(id: number, updatedBooking: Booking): Observable<void> {
 
     //Gives the index of the booking that wants to be updated by user
-    const index = this.bookingsArray.findIndex(bok => bok.id === id);
-
+    ///const index = this.bookingsArray.findIndex(bok => bok.id === id);
+    return this.http.put<void>(this.baseUrl + 'update/'+ id, updatedBooking);
     //Now we take the booking from the array and switch it with the updated one
-    this.bookingsArray[index] = updatedBooking;
+    //this.bookingsArray[index] = updatedBooking;
     //Adding item to local storage
 
   }
