@@ -52,7 +52,16 @@ export class BookingFormComponent implements OnInit{
 
   if(id != undefined){
   
-    let booking = bookingServiceImpl.getBookingById(Number(id));
+    let booking: any = null;
+
+    //let booking = bookingServiceImpl.getBookingById(Number(id));
+    bookingServiceImpl.getBookingById(Number(id))?.subscribe(returnData => {
+
+      booking = returnData;
+      console.log(booking);
+
+    })
+
 
     if(booking!= undefined){
 
@@ -70,18 +79,21 @@ export class BookingFormComponent implements OnInit{
     if(this.bookingForm.valid){
       console.log("INFO: Form is Valid")
 
-      const currentBooking: Booking = this.bookingForm.value; 
+      const currentBooking: Booking = this.bookingForm.value;
+      console.log(currentBooking) ;
 
       //If id is present then we are updating not creating
       const id = this.activeRoute.snapshot.paramMap.get('id');
+
       if(id){
         //UPDATE
+        console.log('INFO: id is present')
         currentBooking.id = parseInt(id); 
         this.bookingServiceImpl.updateBooking(parseInt(id), currentBooking);
       }else{
         // New Booking
+        console.log('INFO: id is not present...c reating new booking')
         this.bookingServiceImpl.addbooking(currentBooking);
-
       }
 
       //When user clicks submit we want to navigate them to the Booking list url and it will display the list

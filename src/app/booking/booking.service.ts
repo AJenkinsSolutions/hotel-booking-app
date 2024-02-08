@@ -27,7 +27,9 @@ export class BookingService implements OnInit{
 
   //Mockoon Api base Url
   private baseUrl: string = 'http://localhost:3001/';
-  private getEndpoint: string = 'bookings';
+  private getAllEndpoint: string = 'bookings';
+  private getEndpoint: string = 'booking/';
+  private postEndpoint: string = 'add';
 
   //DI: so we can use our httpClient
  constructor(private http: HttpClient){}
@@ -50,7 +52,7 @@ export class BookingService implements OnInit{
    */
   getAllBookings(): Observable<Booking[]>{
     // return this.bookingsArray;
-    return this.http.get<Booking[]>(this.baseUrl + this.getEndpoint);
+    return this.http.get<Booking[]>(this.baseUrl + this.getAllEndpoint);
   }
 
   /**
@@ -58,9 +60,11 @@ export class BookingService implements OnInit{
    * @param id 
    * @returns Single Booking Obj 
    */
-  getBookingById(id: number): Booking | undefined{ 
+  getBookingById(id: number): Observable<Booking> | undefined{ 
     //It searches through the Array and returns the OBJ with matching ID
-    return this.bookingsArray.find(bok => bok.id == id);
+
+    return this.http.get<Booking>(this.baseUrl + this.getEndpoint + id);
+    //return this.bookingsArray.find(bok => bok.id == id);
   }
 
   /**
@@ -68,10 +72,13 @@ export class BookingService implements OnInit{
    * @param booking 
    */
   addbooking(booking: Booking): void{
+    console.log('INFO: Entered intop addBoooking in Booking service')
+    const body: Booking = booking;
+    body.id = Date.now();
+    console.log(body)
+    //this.bookingsArray.push(booking);
 
-    booking.id = Date.now();
-    this.bookingsArray.push(booking);
-    //Adding item to local storage
+    this.http.post<Booking>(this.baseUrl + this.postEndpoint, body);
 
   }
   

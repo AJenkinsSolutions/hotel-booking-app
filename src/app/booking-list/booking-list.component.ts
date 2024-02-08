@@ -22,7 +22,6 @@ export class BookingListComponent implements OnInit{
 
     this.bookingService.getAllBookings().subscribe(bookings => {
       this.bookingArray = bookings
-      console.log("hello world")
 
     });
 
